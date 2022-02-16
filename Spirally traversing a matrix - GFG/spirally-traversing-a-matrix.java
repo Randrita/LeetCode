@@ -34,36 +34,47 @@ class Solution
 {
     static ArrayList<Integer> spirallyTraverse(int matrix[][], int r, int c)
     {
-        ArrayList<Integer> al = new ArrayList<Integer>();
-        int top=0, down=r-1, left=0, right=c-1;
-        int dir=0;
-        while(top<=down && left<=right){
-            if(dir==0){
-                for(int i=left; i<=right; i++){
-                    al.add(matrix[top][i]);
-                }
-                top+=1;
-            }
-            else if(dir==1){
-                for(int i=top; i<=down; i++){
-                    al.add(matrix[i][right]);
-                }
-                right-=1;
-            }
-            else if(dir==2){
-                for(int i=right; i>=left; i--){
-                    al.add(matrix[down][i]);
-                }
-                down-=1;
-            }
-            else if(dir==3){
-                for(int i=down; i>=top; i--){
-                    al.add(matrix[i][left]);
-                }
-                left+=1;
-            }
-            dir = (dir+1) % 4;
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        
+        int minr=0;
+        int minc=0;
+        int maxr=r-1;
+        int maxc=c-1;
+        
+        int count=0;
+        int v=r*c;
+        
+        while(count<v){
+            //top
+        for(int i=minr,j=minc;j<=maxc && count<v;j++){
+            a.add(matrix[i][j]);
+            count++;
         }
-        return al;
+        
+        minr++;
+        
+        //right
+        for(int i=minr,j=maxc;i<=maxr && count<v;i++){
+            a.add(matrix[i][j]);
+            count++;
+        }
+        
+        maxc--;
+        
+        //bottom
+        for(int i=maxr,j=maxc;j>=minc && count<v;j--){
+            a.add(matrix[i][j]);
+            count++;
+        }
+        maxr--;
+        
+        //left
+        for(int i=maxr,j=minc;i>=minr && count<v;i--){
+            a.add(matrix[i][j]);
+            count++;
+        }
+        minc++;
+        }
+        return a;
     }
 }
