@@ -45,22 +45,29 @@ class Solution
 {
    //Function to delete middle element of a stack.
    public void deleteMid(Stack<Integer>s,int sizeOfStack){
-       // code here
-       if(sizeOfStack == 0)
-           return;
-       int k = (sizeOfStack/2)+1;
-       solve(s, k);
-       return;
+       
+       int mid=sizeOfStack/2;
+       int count=0;
+       solve(s,mid,count);
+
    }
-   private void solve(Stack<Integer> s, int k){
-       if(k==1){
+   
+   static void solve(Stack<Integer>s,int mid,int count){
+       
+       //base condition
+       if(count==mid)
+       {
            s.pop();
            return;
        }
-       int temp = s.pop();
-       solve(s, k-1);
-       s.push(temp);
-       return;
+       
+       int num=s.peek();
+       s.pop();
+       
+       //recursive call
+       solve(s,mid,count+1);
+       
+       s.push(num);
    }
 }
 
