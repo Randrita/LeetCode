@@ -29,12 +29,22 @@ class GFG {
 class Solution {
    int MissingNumber(int array[], int n) {
        // Your Code Here
-         int sum=(n*(n+1))/2;
-       for(int i=0;i<array.length;i++)
-       {
-           sum=sum-array[i];
-           
+       int ans=0;
+       int res=0;
+       
+       //using XOR operations
+       for(int i=0;i<n-1;i++){
+           ans^=array[i];
        }
-       return sum;
+       
+       while(n>0){
+           res^=n;
+           n--;
+       }
+       
+       return (ans^res);
+
+       
    }
-   }
+   
+}
