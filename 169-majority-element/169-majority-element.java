@@ -1,16 +1,23 @@
 class Solution {
-// Bit manipulation 
+//Boyer–Moore majority vote algorithm
+//TC- O(N)
 public int majorityElement(int[] nums) {
-    int[] bit = new int[32];
-    for (int num: nums)
-        for (int i=0; i<32; i++) 
-            if ((num>>(31-i) & 1) == 1)
-                bit[i]++;
-    int ret=0;
-    for (int i=0; i<32; i++) {
-        bit[i]=bit[i]>nums.length/2?1:0;
-        ret += bit[i]*(1<<(31-i));
-    }
-    return ret;
+  int count=0;
+  int element=0;
+
+  for(int num:nums){
+      if(count==0){
+          element=num;
+      }
+      
+      if(num==element){
+          count+=1;
+      }
+      
+      else{
+          count-=1;
+      }
+  }
+    return element;
 }
 }
